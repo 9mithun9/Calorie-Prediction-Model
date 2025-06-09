@@ -1,298 +1,110 @@
-Calorie Expenditure Prediction Model
+# 🔥 Calorie Prediction Model (Ensemble-Based)
 
-Project Overview
+[![Streamlit App](https://img.shields.io/badge/Live-Demo-brightgreen?logo=streamlit)](https://calorie-predictor-67ao.onrender.com/)
+[![License](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
 
-This project develops a robust ensemble machine learning model to predict calorie expenditure based on factors such as age, height, weight, heart rate, and exercise duration. Utilizing Random Forest and XGBoost regressors, the model incorporates feature engineering (e.g., BMI, ACSM formula) and addresses predictive accuracy through ensembling. The project showcases skills in data preprocessing, model training, evaluation, and deployment, aligning with the requirements of an Artificial Intelligence Development Specialist role.
+This project predicts the number of calories burned during physical activities using ensemble machine learning models based on user inputs like age, weight, height, duration, and heart rate. It includes advanced feature engineering and is deployed using Streamlit on Render.
 
-Key Features
+---
 
+## 🖼️ App Preview
 
+![Calorie Predictor UI](./img/Calorie_predictor.png)
 
+---
 
+## 📌 Project Overview
 
-Data Preprocessing: Handles numerical features, encodes binary gender, and computes BMI and ACSM calorie estimates.
+- **Goal**: Predict daily calorie burn from physiological and exercise data
+- **Input Features**: Age, Height, Weight, Duration, Heart Rate, Body Temp, Gender
+- **Techniques**: Ensemble learning, BMI and ACSM-based feature engineering
+- **Deployment**: Hosted on Render using Streamlit
 
+---
 
+## 🧠 Feature Engineering
 
-Feature Engineering: Adds BMI and ACSM formula-based features to enhance model performance.
+- **BMI (Body Mass Index)**  
+  ```python
+  BMI = Weight / (Height/100)**2
+  ```
 
+- **ACSM Calorie Estimation**  
+  Based on formulas provided by the American College of Sports Medicine:
+  ```python
+  if Sex == 1:
+      Calories = ((-55.0969 + (0.6309 * HR) + (0.1988 * Weight) + (0.2017 * Age)) / 4.184) * Duration
+  else:
+      Calories = ((-20.4022 + (0.4472 * HR) - (0.1263 * Weight) + (0.074 * Age)) / 4.184) * Duration
+  ```
 
+These features improved model interpretability and accuracy.
 
-Model: Ensembles Random Forest and XGBoost regressors with weighted predictions.
+---
 
+## 📊 Model Performance
 
+### ✅ Validation Metrics
 
-Evaluation: Uses RMSLE (Root Mean Squared Logarithmic Error) as the evaluation metric, per Kaggle competition rules.
+| Model          | MAE    | RMSLE   | R² Score |
+|----------------|--------|---------|----------|
+| Random Forest  | 2.1705 | 0.0616  | 0.9965   |
+| XGBoost        | 2.1805 | 0.0630  | 0.9966   |
+| Ensemble       | 2.1300 | 0.0610  | 0.9966   |
 
+### 📈 Performance Graphs
 
+**Mean Absolute Error (MAE):**  
+![MAE Comparison](./img/model_comparison_mae.png)
 
-Output: Generates a submission file (submission_ensemble.csv) with predictions on test data.
+**R² Score:**  
+![R2 Comparison](./img/model_comparison_r2.png)
 
-Technologies Used
+**Root Mean Squared Log Error (RMSLE):**  
+![RMSLE Comparison](./img/model_comparison_rmsle.png)
 
+---
 
+## 📂 Project Structure
 
+```
+Calorie-Prediction-Model/
+├── app.py                         # Streamlit app
+├── model/
+│   ├── rf_model.joblib            # Random Forest model
+│   └── xgb_model.joblib           # XGBoost model
+├── Calorie_Prediction_Model_ensemble_(V2).ipynb
+├── requirements.txt
+├── README.md
+├── img/
+│   ├── Calorie_predictor.png          # UI screenshot
+│   └── model_comparison_mae.png       # MAE plot
+│   └── model_comparison_r2.png        # R2 score plot
+│   └── model_comparison_rmsle.png     # RMSLE plot
 
+---
 
-Python: Core programming language.
+## 🚀 Run Locally
 
-
-
-Pandas & NumPy: For data manipulation and numerical operations.
-
-
-
-Scikit-learn: For Random Forest model and evaluation metrics.
-
-
-
-XGBoost: For gradient boosting model.
-
-
-
-Opendatasets: For downloading Kaggle competition data.
-
-
-
-Matplotlib & Seaborn: For potential visualization (extendable).
-
-Dataset
-
-The dataset is sourced from the Kaggle competition "Playground Series S5E5" (https://www.kaggle.com/competitions/playground-series-s5e5/data). It includes:
-
-
-
-
-
-Features: Age, Height, Weight, Duration, Heart_Rate, Body_Temp, Sex (male/female), and derived features (BMI, ACSM).
-
-
-
-Target: Calories (continuous variable for regression).
-
-
-
-Files: train.csv, test.csv, sample_submission.csv.
-
-Installation
-
-
-
-
-
-Clone the repository:
-
-git clone https://github.com/your-username/Calorie-Expenditure-Prediction.git
-cd Calorie-Expenditure-Prediction
-
-
-
-Install dependencies:
-
+```bash
+git clone https://github.com/9mithun9/Calorie-Prediction-Model.git
+cd Calorie-Prediction-Model
 pip install -r requirements.txt
+streamlit run app.py
+```
 
-The requirements.txt should include:
+---
 
-pandas
-numpy
-scikit-learn
-xgboost
-opendatasets
-matplotlib
-seaborn
+## 🎯 Output
 
+> 🔥 **Estimated Calories Burned**
 
+---
 
-Install opendatasets (if not included in requirements):
+## 📜 License
 
-pip install opendatasets
+Licensed under the MIT License.
 
-Dataset Download
+---
 
-
-
-
-
-Download the Kaggle dataset:
-
-
-
-
-
-Run the following Python code to download the dataset from the Kaggle competition:
-
-import opendatasets as od
-dataset_url = 'https://www.kaggle.com/competitions/playground-series-s5e5/data'
-od.download(dataset_url)
-
-
-
-When prompted, provide your Kaggle username and API key. Learn more about Kaggle credentials: http://bit.ly/kaggle-creds.
-
-
-
-The dataset will be extracted to the ./playground-series-s5e5 directory.
-
-
-
-Set data directory:
-
-
-
-
-
-Ensure the dataset files (train.csv, test.csv, sample_submission.csv) are in the playground-series-s5e5 folder.
-
-
-
-Update the script to point to the correct data directory:
-
-data_dir = 'playground-series-s5e5'
-
-Usage
-
-
-
-
-
-Run the script:
-
-python calorie_expenditure_model.py
-
-Note: Ensure calorie_expenditure_model.py contains the provided code (data loading, feature engineering, model training, and ensembling).
-
-
-
-Outputs:
-
-
-
-
-
-Console Output: Training and validation RMSLE scores for Random Forest, XGBoost, and the ensemble model.
-
-
-
-
-
-Example: Ensemble Validation RMSLE: 0.06099
-
-
-
-Submission File: submission_ensemble.csv with predictions for the test set.
-
-
-
-Visualizations (optional): Add plots (e.g., feature importance) by extending the script with Matplotlib/Seaborn.
-
-Project Structure
-
-Calorie-Expenditure-Prediction/
-├── calorie_expenditure_model.py  # Main script
-├── playground-series-s5e5/      # Dataset directory
-│   ├── train.csv                # Training data
-│   ├── test.csv                 # Test data
-│   ├── sample_submission.csv    # Sample submission
-├── submission_ensemble.csv      # Output: Submission file
-├── requirements.txt             # Dependencies
-└── README.md                    # This file
-
-Feature Engineering
-
-
-
-
-
-Binary Encoding: Converted Sex to binary (male: 1, female: 0).
-
-
-
-BMI Calculation: Computed as Weight / (Height/100)^2.
-
-
-
-ACSM Formula: Added calorie estimates using the ACSM formula, adjusted for gender, heart rate, weight, age, and duration.
-
-Model Details
-
-
-
-
-
-Random Forest Regressor:
-
-
-
-
-
-Parameters: max_depth=17, min_samples_split=15, n_estimators=400.
-
-
-
-Performance: Train RMSLE: 0.04911, Val RMSLE: 0.06160.
-
-
-
-XGBoost Regressor:
-
-
-
-
-
-Parameters: n_estimators=700, learning_rate=0.08, max_depth=6.
-
-
-
-Performance: Train RMSLE: 0.05917, Val RMSLE: 0.06298.
-
-
-
-Ensemble:
-
-
-
-
-
-Weighted average (60% Random Forest, 40% XGBoost).
-
-
-
-Performance: Ensemble Validation RMSLE: 0.06099.
-
-Results
-
-
-
-
-
-The ensemble model achieves a validation RMSLE of 0.06099, indicating strong predictive performance on unseen data.
-
-
-
-The submission file (submission_ensemble.csv) is formatted for Kaggle competition submission, predicting calorie expenditure for the test set.
-
-Future Improvements
-
-
-
-
-
-Incorporate additional features (e.g., interaction terms or polynomial features).
-
-
-
-Experiment with advanced ensembling techniques (e.g., stacking).
-
-
-
-Add visualizations for feature importance and prediction errors.
-
-
-
-Deploy the model as a web application using Flask or FastAPI.
-
-Author
-
-MD Mehedi Hasan Mithun 
-https://www.linkedin.com/in/md-mehedi-hasan-mithun-1428b1124/
-9mithun9@gmail.com 
+Made with ❤️ by [Mithun Marshal](https://github.com/9mithun9)
