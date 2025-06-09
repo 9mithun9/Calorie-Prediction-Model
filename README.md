@@ -11,6 +11,7 @@ This project predicts the number of calories burned during physical activities u
 
 ![Calorie Predictor UI](./img/Calorie_predictor.png)
 
+🔗 **Also available on Streamlit Cloud**: [Click here to try it instantly](https://calorie-prediction-model-currhvtnfjrnwulqmgluuj.streamlit.app/)
 ---
 
 ## 📌 Project Overview
