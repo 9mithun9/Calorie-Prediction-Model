@@ -4,7 +4,7 @@ import joblib
 import numpy as np
 
 # Load models
-rf_model = joblib.load('rf_model.pkl')
+#rf_model = joblib.load('rf_model.pkl')
 xgb_model = joblib.load('xgb_model.pkl')
 
 st.title("🔥 Calorie Burn Prediction App")
